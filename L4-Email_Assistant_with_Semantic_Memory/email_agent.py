@@ -8,12 +8,12 @@ from lang_graph_project.constants.prompt_templates import triage_system_prompt_t
 from lang_graph_project.constants.variables import profile, prompt_instructions
 from lang_graph_project.agent.memory import new_in_store_memory
 
-import base_triag
+import triage_agent
 import main_agent
 
 class EmailAgent():
     def __init__(self, 
-                 triage_agent: base_triag.TriageAgent, 
+                 triage_agent: triage_agent.TriageAgent, 
                  main_agent: main_agent.ReactAgent):
         self.triage_agent = triage_agent
         self.main_agent = main_agent
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     model = "qwen2.5-it:3b"
     config = {"configurable": {"langgraph_user_id": "lance"}}
     agent = EmailAgent(
-        base_triag.TriageAgent(model), 
+        triage_agent.TriageAgent(model=model), 
         main_agent.ReactAgent(model=model), 
     )    
     # Show the agent

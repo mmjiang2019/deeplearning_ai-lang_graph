@@ -7,11 +7,11 @@ from lang_graph_project.schemas.state import State
 from lang_graph_project.constants.prompt_templates import triage_system_prompt_template, triage_user_prompt_template
 from lang_graph_project.constants.variables import profile, prompt_instructions
 
-import base_triag
+import triage_agent
 import main_agent
 
 class EmailAgent():
-    def __init__(self, triage_agent: base_triag.TriageAgent, main_agent: main_agent.ReactAgent):
+    def __init__(self, triage_agent: triage_agent.TriageAgent, main_agent: main_agent.ReactAgent):
         self.triage_agent = triage_agent
         self.main_agent = main_agent
         email_agent = StateGraph(State)
@@ -85,7 +85,7 @@ class EmailAgent():
 
 if __name__ == "__main__":
     model = "qwen2.5-it:3b"
-    agent = EmailAgent(base_triag.TriageAgent(model), main_agent.ReactAgent(model=model))
+    agent = EmailAgent(triage_agent.TriageAgent(model), main_agent.ReactAgent(model=model))
     
     # Show the agent
     display(Image(agent.email_agent.get_graph(xray=True).draw_mermaid_png()))

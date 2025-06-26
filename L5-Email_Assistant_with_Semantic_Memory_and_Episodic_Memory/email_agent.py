@@ -7,14 +7,14 @@ from IPython.display import Image, display
 from lang_graph_project.schemas.state import State
 from lang_graph_project.constants.prompt_templates import triage_system_prompt_template, triage_user_prompt_template
 from lang_graph_project.constants.variables import profile, prompt_instructions
-from lang_graph_project.utils.formator import format_few_shot_examples_v1
+from lang_graph_project.utils.formator import format_few_shot_examples_v1, format_few_shot_examples
 
-import base_triag
+import triage_agent
 import main_agent
 
 class EmailAgent():
     def __init__(self, 
-                 triage_agent: base_triag.TriageAgent, 
+                 triage_agent: triage_agent.TriageAgent, 
                  main_agent: main_agent.ReactAgent):
         self.triage_agent = triage_agent
         self.main_agent = main_agent
@@ -104,11 +104,11 @@ class EmailAgent():
 if __name__ == "__main__":
     model = "qwen2.5-it:3b"
     agent = EmailAgent(
-        base_triag.TriageAgent(model), 
+        triage_agent.TriageAgent(model=model), 
         main_agent.ReactAgent(model=model), 
     )    
-    # Show the agent
-    display(Image(agent.email_agent.get_graph(xray=True).draw_mermaid_png()))
+    # Show the agent, used in jupyter notebook
+    # display(Image(agent.email_agent.get_graph(xray=True).draw_mermaid_png()))
     
     # Useless currently
     # config = {"configurable": {"langgraph_user_id": "lance"}}

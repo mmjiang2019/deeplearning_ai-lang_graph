@@ -18,16 +18,6 @@ class ReactAgent:
             prompt=create_prompt,
         )
 
-# Codes below are moved to class ReactAgent
-# llm = create_model(model=model)
-
-# tools=[write_email, schedule_meeting, check_calendar_availability]
-# agent = create_react_agent(
-#     model=llm,
-#     tools=tools,
-#     prompt=create_prompt,
-# )
-
 if __name__ == '__main__':
     # model = "qwen3:1.7b"
     model = "qwen2.5-it:3b"
